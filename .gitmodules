@@ -1,0 +1,3 @@
+[submodule "libft-improved"]
+	path = libft-improved
+	url = git@github.com:palgarob/libft-improved.git
