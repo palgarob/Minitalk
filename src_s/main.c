@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:40:46 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/02/14 21:41:38 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:50:45 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(void)
 	struct sigaction	sa;
 
 	ft_printf("Server PID: %d\n", getpid());
-	sa.sa_hanlder = sighandler;
+	sa.sa_handler = sighandler;
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);

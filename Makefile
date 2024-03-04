@@ -6,7 +6,7 @@
 #    By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/14 17:23:53 by pepaloma          #+#    #+#              #
-#    Updated: 2024/03/04 18:08:02 by pepaloma         ###   ########.fr        #
+#    Updated: 2024/03/04 20:49:25 by pepaloma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ OBJ_DIR_C		= obj_c
 OBJ_DIR_S		= obj_s
 SRC_DIR_C		= src_c
 SRC_DIR_S		= src_s
-INC_DIR			= inc
 BIN_DIR			= bin
 
 CLIENT		= $(BIN_DIR)/client
@@ -25,7 +24,6 @@ CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -fsanitize=address -g3
 RM				= rm -rf
 LIBFT_LINK_FLAGS= -I$(LIBFT_DIR) -L $(LIBFT_DIR) -lft
-INC_FLAGS		= -I$(INC_DIR)
 #VALGRIND_FLAGS	= -O0 -g
 
 FILES_C	= $(notdir $(wildcard src_c/*.c))
@@ -42,12 +40,12 @@ all : $(CLIENT) $(SERVER)
 $(CLIENT) : $(OBJ_C)
 	$(MAKE) -C $(LIBFT_DIR)
 	mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) $(LIBFT_LINK_FLAGS) $(OBJ_C) -o $(CLIENT)
+	$(CC) $(CFLAGS) $(LIBFT_LINK_FLAGS) $(INC_FLAGS) $(OBJ_C) -o $(CLIENT)
 
 $(SERVER) : $(OBJ_S)
 	$(MAKE) -C $(LIBFT_DIR)
 	mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) $(LIBFT_LINK_FLAGS) $(OBJ_S) -o $(SERVER)
+	$(CC) $(CFLAGS) $(LIBFT_LINK_FLAGS) $(INC_FLAGS) $(OBJ_S) -o $(SERVER)
 
 $(OBJ_DIR_C)/%.o : $(SRC_DIR_C)/%.c
 	mkdir -p $(OBJ_DIR_C)
