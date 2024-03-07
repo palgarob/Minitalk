@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:40:46 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/03/04 20:50:45 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:48:01 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 
 void	sighandler(int signum)
 {
-	static unsigned char	character = 0;
-	static unsigned char	bits = 0;
-	
-	character = character << 1;
-	if (signum == SIGUSR2)
-		;
-	else if (signum == SIGUSR1)
-		character = character | 1;
-	bits++;
-	if (bits == 8)
+	static int				j = 0;
+	static unsigned char	c = 0;
+
+	if (signum == SIGUSR1)
+		c = c | 1;
+	j++;
+	if (j == 8)
 	{
-		write(1, &character, 1);
-		bits = 0;
-		character = 0;
+		write(STDOUT_FILENO, &c, 1);
+		j = 0;
+		c = 0;
 	}
+	c = c << 1;
 }
 
 int	main(void)
