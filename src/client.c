@@ -6,11 +6,11 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:47:59 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/03/08 23:21:01 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:51:34 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minitalk.h"
+#include "minitalk.h"
 
 int	main(int argc, char **argv)
 {
