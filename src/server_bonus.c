@@ -1,56 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/11 14:46:46 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/03/11 17:59:10 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/02/14 18:40:46 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/03/11 18:15:02 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	handler(int signum)
+void	handler(int sig, __attribute__((unused)) siginfo_t *info, __attribute__((unused)) void *context)
 {
+	static int				j = 0;
 	static unsigned char	c = 0;
-	static int				i = 0;
 
-	if (signum == SIGUSR1)
-		c |= 1;
-	i++;
-	if (i == 8)
+	if (sig == SIGUSR1)
+		c = c | 1;
+	j++;
+	if (j == 8)
 	{
-		write(STDOUT_FILENO, &c, 1);
+		ft_printf("%c", c);
+		j = 0;
 		c = 0;
-		i = 0;
 	}
 	c <<= 1;
-	
+	if (sig == SIGUSR1)
+		kill(info->si_pid, SIGUSR1);
+	if (sig == SIGUSR2)
+		kill(info->si_pid, SIGUSR2);
 }
 
 int	main(void)
 {
-	printf("PID: %d\n", getpid());
-	signal(SIGUSR1, handler);
-	signal(SIGUSR2, handler);
-	while (1)
-		pause();
-}
-
-/* This is the same main but it uses sigaction instead of signal */
-
-/* int	main(void)
-{
 	struct sigaction	act;
 
 	ft_printf("Server PID: %d\n", getpid());
-	act.sa_handler = sighandle;
-	act.sa_flags = SA_RESTART; // This is necessary, read about signals (search signal(7))
+	act.sa_sigaction = handler;
+	act.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &act, NULL);
 	sigaction(SIGUSR2, &act, NULL);
 	while (1)
 		pause();
 	return (0);
-} */
+}

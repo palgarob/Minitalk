@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 18:47:59 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/03/11 15:55:44 by pepaloma         ###   ########.fr       */
+/*   Created: 2024/03/11 15:26:19 by pepaloma          #+#    #+#             */
+/*   Updated: 2024/03/11 18:16:43 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,22 @@ void	send_signal(unsigned char c, pid_t pid)
 	}
 }
 
+void	acksig(int signum)
+{
+	if (signum == SIGUSR1)
+		printf("1");
+	if (signum == SIGUSR2)
+		printf("0");
+}
+
 int	main(int argc, char **argv)
 {
-	pid_t			pid;
-	unsigned long	i;
-	unsigned char	c;
+	pid_t				pid;
+	unsigned long long	i;
+	unsigned char		c;
 	
+	signal(SIGUSR1, acksig);
+	signal(SIGUSR2, acksig);
 	if (argc != 3)
 		ft_error(ERROR_ARGNUM, 0, 0, 0);
 	pid = ft_atoi(argv[1]);

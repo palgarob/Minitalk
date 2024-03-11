@@ -19,7 +19,7 @@ VALGRIND_FLAGS	= -O0 -g
 
 all : $(CLIENT) $(SERVER)
 
-bonus : client_bonus server_bonus
+bonus : $(CLIENT_B) $(SERVER_B)
 
 $(CLIENT) : $(SRC_DIR)/client.c
 	$(MAKE) -C $(LIBFT_DIR)
