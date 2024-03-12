@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 18:40:46 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/03/11 18:15:02 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:10:00 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	handler(int sig, __attribute__((unused)) siginfo_t *info, __attribute__((un
 	j++;
 	if (j == 8)
 	{
-		ft_printf("%c", c);
+		write(STDOUT_FILENO,  &c, 1);
 		j = 0;
 		c = 0;
 	}
@@ -31,6 +31,7 @@ void	handler(int sig, __attribute__((unused)) siginfo_t *info, __attribute__((un
 		kill(info->si_pid, SIGUSR1);
 	if (sig == SIGUSR2)
 		kill(info->si_pid, SIGUSR2);
+	
 }
 
 int	main(void)

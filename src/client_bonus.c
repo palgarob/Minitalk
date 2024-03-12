@@ -6,7 +6,7 @@
 /*   By: pepaloma <pepaloma@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:26:19 by pepaloma          #+#    #+#             */
-/*   Updated: 2024/03/11 18:16:43 by pepaloma         ###   ########.fr       */
+/*   Updated: 2024/03/12 11:51:53 by pepaloma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	send_signal(unsigned char c, pid_t pid)
 void	acksig(int signum)
 {
 	if (signum == SIGUSR1)
-		printf("1");
+		write(STDOUT_FILENO, "1", 1);
 	if (signum == SIGUSR2)
-		printf("0");
+		write(STDOUT_FILENO, "0", 1);
 }
 
 int	main(int argc, char **argv)

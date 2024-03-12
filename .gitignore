@@ -51,3 +51,8 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+bclient_bonus
+bserver_bonus
+client
+server
